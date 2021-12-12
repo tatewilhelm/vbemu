@@ -3,4 +3,4 @@ project(vbemu C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(vbemu src/main.c src/main.h)
+add_executable(vbemu src/main.c src/main.h src/*.c src/*.h)
