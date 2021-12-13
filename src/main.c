@@ -1,69 +1,45 @@
 #include <stdio.h>
-#include <stdbool.h>
+#include "arguments.h"
+#include "gb/gameboy.h"
 
-enum System
-{
-    CHIP_8, SUPER_CHIP, GAME_BOY
-};
-struct Arguments
-{
-    int error;
-    /*
-     * 0 is all good,
-     * 1 is insufficient/too many Arguments,
-     * 2 is arg(s) are not understood
-     * 3 is file not found
-     */
-    int argc;
-    char **argv;
-    const char *path;
-    enum System system;
-};
 
-struct Arguments argument_lexicalizer(int argc, char **argv)
-{
-    struct Arguments buffer;
-    buffer.argv = argv;
-    buffer.argc = argc;
+int main(int argc, char **argv) {
 
-    // if too many Arguments or too less
-    if (argc != 3)
+    struct Arguments arguments = argument_lexicalizer(argc, argv);
+
+    // Error management
+    if (arguments.error != 0)
     {
-        buffer.error = 1;
-        return buffer;
+        printf("vbemu: Given arguments threw a internal %d error.\n", arguments.error);
+        switch(arguments.error)
+        {
+            // Make sure to be compliant with posix exit codes.
+            case 1:
+                return 7;
+            case 2:
+                return 22;
+            case 3:
+                return 2;
+        }
     }
 
-    // check if file exists
-    FILE *file;
-    if ((file = fopen(argv[1], "r")))
-    {
-        buffer.path = argv[1];
-    } else {
-        fclose(file);
-        buffer.error = 3;
-        return buffer;
+    // Start system
+    switch (arguments.system) {
+        int return_code;
+        case GAME_BOY:
+            printf("vbemu: Starting Game Boy mode\n");
+            return_code = start_gameboy(arguments);
+            break;
+        case CHIP_8:
+            printf("vbemu: Starting Chip 8 mode\n");
+            break;
+        case SUPER_CHIP:
+            printf("vbemu: Starting Super Chip 8 mode\n");
+            break;
+        case UNDEFINED:
+            printf("vbemu: Undefined system\n");
+            return -1;
     }
-
-    if (argv[2] == "-8" || argv == "--chip-8")
-    {
-        buffer.system = CHIP_8;
-    } else if (argv[2] == "-s" || argv == "--super-chip") {
-        buffer.system = SUPER_CHIP;
-
-    } else {
-        buffer.error = 2;
-    }
-    // all good
-    buffer.error = 0;
-    return buffer;
-}
-
-
-int main(int argc, char **argv)
-{
-    printf("ARGC %i\n", argc);
-    struct Arguments test = argument_lexicalizer(argc, argv);
-    printf("Error code %i\n", test.error);
 }
 
 
