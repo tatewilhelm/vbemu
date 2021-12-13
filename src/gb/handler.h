@@ -1,4 +1,0 @@
-#ifndef VBEMU_HANDLER_H
-#define VBEMU_HANDLER_H
-
-#endif //VBEMU_HANDLER_H
