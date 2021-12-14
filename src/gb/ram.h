@@ -1,7 +1,7 @@
 #ifndef VBEMU_RAM_H
 #define VBEMU_RAM_H
 
-struct Ram {
+struct GBRam {
     uint8_t rom[2][0x4000];
     uint8_t video_ram[0x2000];
     uint8_t external_ram[0x2000];
