@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "gameboy.h"
 #include "../arguments.h"
 
