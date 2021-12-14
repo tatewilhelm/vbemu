@@ -2,8 +2,6 @@
 #include "arguments.h"
 
 
-
-
 struct Arguments argument_lexicalizer(int argc, char **argv)
 {
     struct Arguments buffer;
