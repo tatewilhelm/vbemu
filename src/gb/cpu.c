@@ -3,7 +3,7 @@
 
 
 
-struct Registers {
+struct GBRegisters {
     uint16_t af;
     uint16_t bc;
     uint16_t de;
