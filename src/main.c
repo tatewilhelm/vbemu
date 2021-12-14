@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include "arguments.h"
-#include "gb/gameboy.h"
-
 
 int main(int argc, char **argv) {
 
@@ -28,7 +26,6 @@ int main(int argc, char **argv) {
         int return_code;
         case GAME_BOY:
             printf("vbemu: Starting Game Boy mode\n");
-            return_code = start_gameboy(arguments);
             break;
         case CHIP_8:
             printf("vbemu: Starting Chip 8 mode\n");
