@@ -25,7 +25,6 @@ struct Arguments argument_lexicalizer(int argc, char **argv)
     {
         buffer.path = argv[1];
     } else {
-        fclose(file);
         buffer.error = 3;
         buffer.system = UNDEFINED;
         buffer.path = argv[1];
