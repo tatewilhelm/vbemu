@@ -1,4 +1,5 @@
 #include "memory.h"
+#include <stdint.h>
 
 uint16_t I = 0;
 byte dt = 0;
@@ -20,6 +21,10 @@ byte mem_get(int i) {
     if (i < CH8_START_INDEX) return 0;
     if (i > CH8_MEMORY) return 0;
     return _ram[i];
+}
+
+byte* get_mem_addr(int i) {
+    return &mem_get(i);
 }
 
 void mem_set(int i, byte val) {

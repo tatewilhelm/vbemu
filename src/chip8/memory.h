@@ -24,6 +24,7 @@ void mem_wipe();
 void reg_wipe();
 byte mem_get(int i); // Access ram
 void mem_set(int i, byte val);
+byte* get_mem_addr(int i);
 byte reg_get(int i); // Access registers
 void reg_set(int i, byte val);
 
