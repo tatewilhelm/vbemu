@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
             break;
         case CHIP_8:
             printf("vbemu: Starting Chip 8 mode\n");
-            return_code = 0;
+            return_code = start_chip8();
             break;
         case SUPER_CHIP:
             printf("vbemu: Starting Super Chip 8 mode\n");
