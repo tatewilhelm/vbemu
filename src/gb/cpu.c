@@ -13,8 +13,3 @@ struct Registers {
 };
 
 
-
-bool load_rom(char *path)
-{
-
-}
