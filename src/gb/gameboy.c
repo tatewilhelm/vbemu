@@ -1,12 +1,12 @@
 #include <stdbool.h>
 #include "gameboy.h"
-#include "../arguments.h"
-
+#include "ram.h"
+#include "cpu.h"
 
 
 
 int start_gameboy(struct Arguments arguments) {
-//    if (load_rom(arguments.path)) {
-//
-//    }
+    if (gb_load_rom(arguments.path)) {
+
+    }
 }
