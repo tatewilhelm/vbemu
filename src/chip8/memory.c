@@ -18,19 +18,19 @@ void reg_wipe() {
 }
 
 byte mem_get(int i) {
-    if (i < CH8_START_INDEX) return 0;
+    //if (i < CH8_START_INDEX) return 0;
     if (i > CH8_MEMORY) return 0;
     return _ram[i];
 }
 
-byte* get_mem_addr(int i) {
-    return &mem_get(i);
-}
-
 void mem_set(int i, byte val) {
-    if (i < CH8_START_INDEX) return;
+    //if (i < CH8_START_INDEX) return;
     if (i > CH8_MEMORY) return;
     _ram[i] = val;
+}
+
+void* mem_ptr(int i) {
+    return _ram+i;
 }
 
 byte reg_get(int i) {
