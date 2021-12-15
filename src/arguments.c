@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
 #include "arguments.h"
 
 
@@ -31,15 +33,19 @@ struct Arguments argument_lexicalizer(int argc, char **argv)
         return buffer;
     }
 
-    if (argv[2] == "-8" || argv == "--chip-8")
+
+
+    if (strcmp(argv[2], "--chip-8") == false)
     {
         buffer.system = CHIP_8;
-    } else if (argv[2] == "-s" || argv == "--super-chip") {
+    } else if (strcmp(argv[2], "--super-chip") == false) {
         buffer.system = SUPER_CHIP;
-
+    } else if (strcmp(argv[2], "--game-boy") == false) {
+        buffer.system = GAME_BOY;
     } else {
         buffer.error = 2;
     }
+
     // all good
     buffer.error = 0;
     return buffer;
