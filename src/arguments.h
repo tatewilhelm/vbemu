@@ -4,7 +4,7 @@
 
 enum System
 {
-    CHIP_8, SUPER_CHIP, GAME_BOY, UNDEFINED
+    UNDEFINED, CHIP_8, SUPER_CHIP, GAME_BOY
 };
 
 
