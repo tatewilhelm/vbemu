@@ -6,7 +6,5 @@
 
 
 int start_gameboy(struct Arguments arguments) {
-    if (gb_load_rom(arguments.path)) {
 
-    }
 }
