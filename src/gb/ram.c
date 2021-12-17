@@ -1,7 +1,11 @@
 #include <stdint.h>
 #include "ram.h"
 
-struct GBRam gb_load_rom(char *path, struct GBRam ram)
+struct gb_ram_t ram;
+
+void gb_load_rom(char *path)
 {
-    return ram;
+
 }
+
+
