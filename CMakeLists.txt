@@ -9,6 +9,6 @@ add_executable(vbemu
         src/main.c src/main.h src/arguments.c src/arguments.h
         # Game Boy
         src/gb/gameboy.c src/gb/gameboy.h src/gb/cpu.c src/gb/cpu.h
-        src/gb/ram.c src/gb/ram.h src/gb/configuration.c src/gb/configuration.h)
+        src/gb/ram.c src/gb/ram.h)
 
 
