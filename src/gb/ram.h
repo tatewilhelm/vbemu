@@ -4,7 +4,7 @@
 
 enum gb_licensee
 {
-    UNDEFINED, EA
+    EA, UBISOFT
 };
 
 struct gb_ram_t {
@@ -22,13 +22,9 @@ struct gb_ram_t {
     enum gb_licensee licensee;
 };
 
-
 struct gb_ram_t ram;
 
-void gb_load_rom(char *path)
-{
-
-}
+void gb_load_rom(char *path);
 
 
 #endif //VBEMU_RAM_H

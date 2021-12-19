@@ -5,6 +5,7 @@
 
 
 
-int start_gameboy(struct Arguments arguments) {
+int start_gameboy(struct Arguments arguments)
+{
 
 }
