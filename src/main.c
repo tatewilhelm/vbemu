@@ -1,5 +1,11 @@
 #include <stdio.h>
 #include "arguments.h"
+<<<<<<< HEAD
+=======
+#include "gb/gameboy.h"
+#include "chip8/interp.h"
+
+>>>>>>> chip8
 
 int main(int argc, char **argv) {
 
@@ -22,20 +28,23 @@ int main(int argc, char **argv) {
     }
 
     // Start system
+    int return_code = -1;
+    printf("%i\n", arguments.system);
     switch (arguments.system) {
-        int return_code;
         case GAME_BOY:
             printf("vbemu: Starting Game Boy mode\n");
             break;
         case CHIP_8:
             printf("vbemu: Starting Chip 8 mode\n");
+            return_code = 0;
+            return_code = start_chip8(arguments);
             break;
         case SUPER_CHIP:
             printf("vbemu: Starting Super Chip 8 mode\n");
             break;
         case UNDEFINED:
             printf("vbemu: Undefined system\n");
-            return -1;
+        return return_code;
     }
 }
 
