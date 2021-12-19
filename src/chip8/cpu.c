@@ -17,9 +17,12 @@ int imatch(byte v1, byte v2, byte keep_mask) {
 }
 
 int imatch16 (uint16_t v1, uint16_t v2, uint16_t keep_mask) {
-    
+    return 0;    
 }
 
 void parse(uint16_t ptr) {
+    byte b1 = mem_get(ptr);
+    byte b2 = mem_get(ptr+1);
+    printf("%04x%04x", b1, b2);
     printf("\n");
 }

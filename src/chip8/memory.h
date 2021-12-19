@@ -11,14 +11,14 @@
 
 typedef uint8_t byte;
 
-byte _ram[CH8_MEMORY]; // Ram
-byte _regs[CH8_REGISTERS]; // Registers
-uint16_t I; // Special register for addresses
-byte dt; // Delay timer 
-byte st; // Sound timer
-uint16_t PC; // Program counter
-uint16_t stack[CH8_STACK];
-byte stack_top;
+extern byte _ram[CH8_MEMORY]; // Ram
+extern byte _regs[CH8_REGISTERS]; // Registers
+extern uint16_t I; // Special register for addresses
+extern byte dt; // Delay timer 
+extern byte st; // Sound timer
+extern uint16_t PC; // Program counter
+extern uint16_t stack[CH8_STACK];
+extern byte stack_top;
 
 void mem_wipe();
 void reg_wipe();

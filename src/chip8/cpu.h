@@ -1,3 +1,4 @@
+#pragma once
 #include "memory.h"
 
 void parse(uint16_t ptr);
