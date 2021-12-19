@@ -1,16 +1,16 @@
 #include "cpu.h"
-int mhz = 1;
-uint8_t get_high(uint16_t reg)
+
+uint8_t gb_get_high(uint16_t reg)
 {
     return (reg & 0b1111111100000000) >> 8;
 }
 
-uint8_t get_low(uint16_t reg)
+uint8_t gb_get_low(uint16_t reg)
 {
     return reg & 0b0000000011111111;
 }
 
-uint8_t get_single_register(struct gb_registers_t registers, char reg)
+uint8_t gb_get_single_register(struct gb_registers_t registers, char reg)
 {
     switch (reg) {
         case 'a':
@@ -64,7 +64,7 @@ uint8_t get_single_register(struct gb_registers_t registers, char reg)
     }
 }
 
-uint8_t simulate_cycles(int cycles)
+uint8_t gb_simulate_cycles(int cycles)
 {
     
 }
@@ -76,5 +76,7 @@ uint8_t simulate_cycles(int cycles)
  * and the last instructions execute at the same time. We can just simulate an instruction without
  * fetch and just execute it after the last instruction has finished.
  */
+
+void gb_nop
 
 

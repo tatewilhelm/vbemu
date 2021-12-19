@@ -4,7 +4,7 @@
 #ifndef VBEMU_CPU_H
 #define VBEMU_CPU_H
 
-
+int gb_mhz = 1;
 struct gb_registers_t {
     uint16_t af;
     uint16_t bc;
