@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include "arguments.h"
-<<<<<<< HEAD
-=======
 #include "gb/gameboy.h"
 #include "chip8/interp.h"
-
->>>>>>> chip8
 
 int main(int argc, char **argv) {
 
@@ -35,7 +31,7 @@ int main(int argc, char **argv) {
             break;
         case CHIP_8:
             printf("vbemu: Starting Chip 8 mode\n");
-            return_code = start_chip8();
+            return_code = start_chip8(arguments);
             break;
         case SUPER_CHIP:
             printf("vbemu: Starting Super Chip 8 mode\n");

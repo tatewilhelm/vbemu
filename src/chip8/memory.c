@@ -1,10 +1,13 @@
 #include "memory.h"
 #include <stdint.h>
 
+byte _ram[] = {};
+byte _regs[] = {};
 uint16_t I = 0;
 byte dt = 0;
 byte st = 0;
 uint16_t PC = CH8_START_INDEX;
+uint16_t stack[] = {};
 byte stack_top = 0;
 
 void mem_wipe() {
