@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 cmake-build-debug/*
-=======
 /cmake-build-debug/
->>>>>>> chip8
 .idea/*
 .vimrc
+.nvimrc
 bin/*
 
