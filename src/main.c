@@ -3,7 +3,6 @@
 #include "gb/gameboy.h"
 #include "chip8/interp.h"
 
-
 int main(int argc, char **argv) {
 
     struct Arguments arguments = argument_lexicalizer(argc, argv);
