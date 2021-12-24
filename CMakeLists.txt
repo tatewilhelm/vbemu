@@ -8,7 +8,7 @@ include_directories(${SDL2_INCLUDE_DIRS})
 add_executable(vbemu
         src/main.c src/main.h src/arguments.c src/arguments.h
         # Game Boy
-        src/gb/gameboy.c src/gb/gameboy.h src/gb/cpu.c src/gb/cpu.h
-        src/gb/ram.c src/gb/ram.h)
+        src/gb/gameboy.c src/gb/gameboy.h src/gb/cpu/cpu.c src/gb/cpu/cpu.h
+        src/gb/ram/ram.c src/gb/ram/ram.h src/gb/rom/cartridge.c src/gb/rom/cartridge.h)
 
 

@@ -1,10 +1,13 @@
 #include <stdbool.h>
 #include <stdint.h>
+#include "../ram/ram.h"
+
 
 #ifndef VBEMU_CPU_H
 #define VBEMU_CPU_H
 
-int gb_mhz = 1;
+int gb_hz = 4000000;
+
 struct gb_registers_t {
     uint16_t af;
     uint16_t bc;
@@ -15,6 +18,7 @@ struct gb_registers_t {
 };
 
 
+// Interfaces with mainloop
 
 
 #endif //VBEMU_CPU_H

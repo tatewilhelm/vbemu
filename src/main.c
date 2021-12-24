@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
     switch (arguments.system) {
         case GAME_BOY:
             printf("vbemu: Starting Game Boy mode\n");
-            return start_gameboy(arguments);
+            return_code = start_gameboy(arguments);
         case CHIP_8:
             printf("vbemu: Starting Chip 8 mode\n");
             return_code = 0;
@@ -39,8 +39,9 @@ int main(int argc, char **argv) {
             break;
         case UNDEFINED:
             printf("vbemu: Undefined system\n");
-            return -1;
+            return_code = -1;
     }
+    return return_code;
 }
 
 
