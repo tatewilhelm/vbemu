@@ -10,6 +10,7 @@ struct Arguments argument_lexicalizer(int argc, char **argv)
     buffer.argc = argc;
     buffer.system = UNDEFINED;
     buffer.path = NULL;
+    buffer.verbose = false;
 
     for (int i = 1; i < argc; i++)
     {
@@ -29,6 +30,10 @@ struct Arguments argument_lexicalizer(int argc, char **argv)
             buffer.system = SUPER_CHIP;
         } else if ((strcmp(argv[i], "--game-boy") == 0)  || (strcmp(argv[i], "-g") == 0)) {
             buffer.system = GAME_BOY;
+        }
+
+        if ((strcmp(argv[i], "--verbose") == 0)  || (strcmp(argv[i], "-v") == 0)) {
+            buffer.verbose = true;
         }
 
     }

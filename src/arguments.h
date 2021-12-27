@@ -1,6 +1,7 @@
 #ifndef VBEMU_ARGUMENTS_H
 #define VBEMU_ARGUMENTS_H
 
+#include <stdbool.h>
 
 enum System
 {
@@ -16,6 +17,7 @@ struct Arguments
     char **argv;
     const char *path;
     enum System system;
+    bool verbose;
 };
 
 struct Arguments argument_lexicalizer(int argc, char **argv);
