@@ -13,7 +13,7 @@ int start_chip8(struct Arguments args) {
     fread(ptr, 1, size, f);
     // Parse
     for (int i = 0; i < size; i++) {
-        parse(i*2);     
+        interpret(i*2);     
     }
     return 0;
 }

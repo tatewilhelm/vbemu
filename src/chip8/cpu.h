@@ -1,6 +1,6 @@
 #include "memory.h"
 
-void parse(uint16_t ptr);
+void interpret(uint16_t ptr);
 
 void CH8_CLS();
 void CH8_RET();

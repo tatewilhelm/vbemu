@@ -4,4 +4,7 @@ cmake-build-debug/*
 .vimrc
 .nvimrc
 bin/*
+bin/*.*
 
+
+bin/
