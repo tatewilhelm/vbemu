@@ -8,15 +8,10 @@ enum System
 };
 
 
+
 struct Arguments
 {
-    int error;
-    /*
-     * 0 is all good,
-     * 1 is insufficient/too many Arguments,
-     * 2 is arg(s) are not understood
-     * 3 is file not found
-     */
+
     int argc;
     char **argv;
     const char *path;

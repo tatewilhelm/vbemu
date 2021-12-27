@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
 #include "arguments.h"
 
 
@@ -9,43 +8,29 @@ struct Arguments argument_lexicalizer(int argc, char **argv)
     struct Arguments buffer;
     buffer.argv = argv;
     buffer.argc = argc;
+    buffer.system = UNDEFINED;
+    buffer.path = NULL;
 
-    // if too many Arguments or too less
-    if (argc != 3)
+    for (int i = 1; i < argc; i++)
     {
-        buffer.error = 1;
-        buffer.system = UNDEFINED;
-        buffer.path = "null";
-        return buffer;
+        // Check if file exists, if so, setting that to the path.
+        FILE *file = fopen(argv[i], "r");
+        if (file)
+        {
+            // File exists
+            fclose(file);
+            buffer.path = argv[i];
+        }
+
+        // Check for systems
+        if ((strcmp(argv[i], "--chip-8") == 0)  || (strcmp(argv[i], "-8") == 0)) {
+            buffer.system = CHIP_8;
+        } else if ((strcmp(argv[i], "--super-chip") == 0)  || (strcmp(argv[i], "-s") == 0)) {
+            buffer.system = SUPER_CHIP;
+        } else if ((strcmp(argv[i], "--game-boy") == 0)  || (strcmp(argv[i], "-g") == 0)) {
+            buffer.system = GAME_BOY;
+        }
+
     }
-
-    // check if file exists
-    FILE *file;
-    if ((file = fopen(argv[1], "r")))
-    {
-        buffer.path = argv[1];
-    } else {
-        buffer.error = 3;
-        buffer.system = UNDEFINED;
-        buffer.path = argv[1];
-        return buffer;
-    }
-
-
-
-    if (strcmp(argv[2], "--chip-8") == false)
-    {
-        buffer.system = CHIP_8;
-    } else if (strcmp(argv[2], "--super-chip") == false) {
-        buffer.system = SUPER_CHIP;
-    } else if (strcmp(argv[2], "--game-boy") == false) {
-        buffer.system = GAME_BOY;
-    } else {
-        buffer.error = 2;
-    }
-
-    // all good
-    buffer.error = 0;
     return buffer;
 }
-
