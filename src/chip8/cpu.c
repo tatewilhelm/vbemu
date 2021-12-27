@@ -21,9 +21,20 @@ int imatch16 (uint16_t v1, uint16_t v2, uint16_t keep_mask) {
 }
 
 void parse(uint16_t ptr) {
-    byte b1 = mem_get(ptr);
-    byte b2 = mem_get(ptr+1);
-    if (!b1 && !b2) return;
-    printf("%02X%02X", b1, b2);
+    // Painful but necessary block. Cannot recast to uint16_t due to little/big endian issues
+    byte byte1 = mem_get(ptr); // First half of instruction
+    byte hx1 = byte1 & 0x0F;
+    byte hx2 = (byte1 & 0xF0) >> 4;
+    byte byte2 = mem_get(ptr+1); // Second half
+    byte hx3 = byte2 & 0x0F;
+    byte hx4 = (byte2 & 0xF0) >> 4;
+    uint16_t full = (byte1 << 8) | byte2; // Full instruction
+
+    if (!byte1 && !byte2) return;
+    printf("%04X - ", full);
+    printf("%X %X %X %X \n", hx1, hx2, hx3, hx4);
+    return;
+    if (full == 0x00E0) printf("cls");
+    if (full == 0x00EE) printf("ret");
     printf("\n");
 }

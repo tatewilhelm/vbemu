@@ -2,7 +2,6 @@
 #include "cpu.h"
 
 int start_chip8(struct Arguments args) {
-    printf("test\n");
     // Find file size
     FILE* f = fopen(args.path, "rb");
     fseek(f, 0L, SEEK_END);
