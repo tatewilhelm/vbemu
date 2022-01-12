@@ -2,28 +2,19 @@
 #include <stdint.h>
 #include <stdio.h>
 
-typedef struct {
-    uint16_t full;
-    byte hx1;
-    byte hx2;
-    byte hx3;
-    byte hx4;
-} Cmd;
 
-Cmd parse(uint16_t ptr) {
-    Cmd ret = {};
+Cmd interpret(uint16_t ptr) {
+    Cmd c = {};
     // Combine both bytes of instruction to single variable
-    ret.full = (mem_get(ptr) << 8) | mem_get(ptr+1);
+    c.full = (mem_get(ptr) << 8) | mem_get(ptr+1);
     // Seperate instruction into 4 bit chunks to aid interpreting
-    ret.hx1 = (ret.full & 0xF000) >> 12;
-    ret.hx2 = (ret.full & 0x0F00) >> 8;
-    ret.hx3 = (ret.full & 0x00F0) >> 4;
-    ret.hx4 = (ret.full & 0x000F);
-    return ret;
-}
+    c.hx1 = (c.full & 0xF000) >> 12;
+    c.hx2 = (c.full & 0x0F00) >> 8;
+    c.hx3 = (c.full & 0x00F0) >> 4;
+    c.hx4 = (c.full & 0x000F);
 
-void interpret(uint16_t ptr) {
-    Cmd c = parse(ptr);
+   c.op = NOP; 
+
     if (c.full == 0) return; // noop
     printf("%04X ", c.full);
     if (c.full == 0x00E0) printf("cls");
