@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <SDL2/SDL.h>
 
 
 Cmd parse(byte b1, byte b2) {
@@ -56,29 +57,37 @@ Cmd parse(byte b1, byte b2) {
         if (c.hx3 == 0x6 && c.hx4 == 0x5) c.op = LD_VXI;
     }
     // Debug print
-    printf("%04X\n", c.full);
     return c;
 }
 
 int step(Program* p) {
-    printf("line: %u", p->PC); // Debug print
     byte b1 = p->ram[p->PC];
     byte b2 = p->ram[p->PC+1];
     Cmd c = parse(b1, b2); // Instruction at program counter
+
+    //Debug prints
+    //printf("%04X - ", c.full);
+
     byte* Vx = &p->registers[c.hx2];
     byte* Vy = &p->registers[c.hx3];
     byte* Vf = &p->registers[0xF];
 
     switch (c.op) {
         case NOP:
-            return 0;
-        case CLS: // TODO
+            break;
+        case CLS: 
+            for (int i = 0; i < CH8_SCREEN_HEIGHT; i++)
+                p->vram[i] = 0;
             break;
         case RET:
            p->PC = p->stack[p->stack_top];
            p->stack_top -= 1;
            break;
         case JP:
+           {
+               int addr = c.full & 0x0FFF;
+               printf("jp - %u\n", addr);
+           }
            p->PC = c.full & 0x0FFF;
            break;
         case CALL:
@@ -87,13 +96,13 @@ int step(Program* p) {
            p->PC = c.full & 0x0FFF;
            break;
         case SE_VX:
-           p->PC += (*Vx == (c.full & 0x00FF));
+           p->PC += (*Vx == (c.full & 0x00FF)) * 2;
             break;
         case SNE_VX:
-            p->PC += (*Vx != (c.full & 0x00FF));
+            p->PC += (*Vx != (c.full & 0x00FF)) * 2;
             break;
         case SE_VXVY:
-            p->PC += (*Vx == *Vy);
+            p->PC += (*Vx == *Vy) * 2;
             break;
         case LD_VX:
             *Vx = c.full & 0x00FF;
@@ -134,7 +143,7 @@ int step(Program* p) {
            *Vx <<= 1;
            break;
         case SNE_VXVY:
-           p->PC += (*Vx != *Vy);
+           p->PC += (*Vx != *Vy) * 2;
            break;
         case LD_I:
            p->I = (c.full &= 0x0FFF);
@@ -146,10 +155,18 @@ int step(Program* p) {
             *Vx = (c.full & 0x00FF) & (rand() % 256);
             break;
         case DRW_VXVY: // TODO
+            *Vf = 0;
+            for (int i = *Vy; i < c.hx4; i++) {
+                uint64_t row = p->ram[p->I];
+                row <<= *Vx;
+                if (*Vf || (row & p->vram[i]) != 0) *Vf = 1;
+                p->vram[i] ^= row;
+            }
             break;
         case SKP_VX: // TODO
             break;
         case SKNP_VX: // TODO
+            p->PC += 2;
             break;
         case LD_VXDT:
             *Vx = p->dt;
@@ -165,7 +182,8 @@ int step(Program* p) {
         case ADD_IVX:
             p->I += *Vx;
             break;
-        case LD_FVX: // TODO
+        case LD_FVX: 
+            p->I = (*Vx) * CH8_MAX_SPRITE;
             break;
         case LD_BVX:
             p->ram[p->I]   = *Vx / 100;
@@ -182,9 +200,9 @@ int step(Program* p) {
                 p->registers[i] = p->ram[p->I + i];
             }
     }
-    p->PC += 1;
+    p->PC += 2;
     p->dt -= (p->dt > 0);
     p->st -= (p->st > 0);
-    return 0;
+    return p->PC >= CH8_MEMORY - 1;
 }
 

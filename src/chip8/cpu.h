@@ -1,4 +1,4 @@
-#include "memory.h"
+#include "ram.h"
 
 typedef enum {
     NOP, CLS, RET, JP, CALL, SE_VX, SNE_VX,
@@ -20,4 +20,5 @@ typedef struct {
     CH8_OP op;
 } Cmd;
 
+Cmd parse(byte b1, byte b2);
 int step(Program* p);
