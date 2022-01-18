@@ -84,10 +84,6 @@ int step(Program* p) {
            p->stack_top -= 1;
            break;
         case JP:
-           {
-               int addr = c.full & 0x0FFF;
-               printf("jp - %u\n", addr);
-           }
            p->PC = c.full & 0x0FFF;
            break;
         case CALL:

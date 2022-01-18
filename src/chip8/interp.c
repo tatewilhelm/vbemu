@@ -44,19 +44,19 @@ static void draw_window() {
     SDL_FillRect(screen, NULL, black);
     SDL_Rect pixel = {0, 0, P_WIDTH, P_HEIGHT};
     for (int y = 0; y < CH8_SCREEN_HEIGHT; y++) {
-        for (int x = 0; x < CH8_SCREEN_WIDTH; x++) {
-            pixel.x = x * P_WIDTH;
-            pixel.y = y * P_HEIGHT;
-            if (1 & program->vram[y] << x)
-                SDL_FillRect(screen, &pixel, white);
-        }
+        unsigned long long row = program->vram[y];
+        pixel.y = y * P_WIDTH;
+        printf("%llu\n", row);
     }
     SDL_UpdateWindowSurface(window);
+    SDL_Delay(100);
 }
 
 static int poll_events() {
-    static SDL_Event e;
+    SDL_Event e;
     while(SDL_PollEvent(&e) != 0) {
+        if (e.type == SDL_QUIT)
+            return 1;
         switch(e.type) {
             case SDL_QUIT:
                 return 1;
@@ -99,8 +99,8 @@ int start_chip8(struct Arguments args) {
     if (load_cart(args.path)) return 1;
     int exit = 0;
     while (!exit) {
-        exit &= poll_events();
-        exit &= step(program);  
+        if (poll_events()) break;
+        if (step(program)) break;
         draw_window();
     }
     destroy_window();
