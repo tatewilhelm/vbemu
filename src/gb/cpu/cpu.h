@@ -1,12 +1,10 @@
 #include <stdbool.h>
 #include <stdint.h>
-#include "../ram/ram.h"
-
+#include "../clock/clock.h"
 
 #ifndef VBEMU_CPU_H
 #define VBEMU_CPU_H
 
-int gb_hz = 4000000;
 
 struct gb_registers_t {
     uint16_t af;
