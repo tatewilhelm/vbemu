@@ -1,7 +1,6 @@
 #include "cpu.h"
 
-uint8_t ram[0xFFFF];
-struct gb_registers_t registers;
+
 
 
 // These are used by the instructions,
@@ -71,11 +70,11 @@ void gb_set_half_carry_flag(bool state)
 }
 
 // These functions below will be interfaced with the mainloop
-
-void gb_open_rom(char *path)
+void gb_open_rom(const char *path)
 {
 
 }
+
 
 
 
@@ -213,7 +212,7 @@ void gb_0x05()
 void gb_0x06()
 {
     gb_start_clock();
-    gb_set_high(&registers.bc, ram[registers.program_counter + 1];
+    gb_set_high(&registers.bc, ram[registers.program_counter + 1]);
     registers.program_counter += 2;
     gb_stop_simulate_clock(4);
 }
@@ -254,4 +253,6 @@ void gb_execute()
     }
 
 }
+
+
 

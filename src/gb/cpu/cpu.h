@@ -15,8 +15,14 @@ struct gb_registers_t {
     uint16_t program_counter;
 };
 
+// GFX needs access to ram and registers, so we are just gonna make them open
+uint8_t ram[0xFFFF];
+struct gb_registers_t registers;
+
 
 // Interfaces with mainloop
+void gb_execute();
+void gb_open_rom(const char *path);
 
 
 #endif //VBEMU_CPU_H
