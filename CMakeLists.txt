@@ -9,6 +9,6 @@ add_executable(vbemu
         src/main.c src/main.h src/arguments.c src/arguments.h
 
         # Game Boy
-        src/gb/gameboy.c src/gb/gameboy.h src/gb/cpu/cpu.c src/gb/cpu/cpu.h src/gb/clock/clock.c src/gb/clock/clock.h)
-
+        src/gb/gameboy.c src/gb/gameboy.h src/gb/cpu/cpu.c src/gb/cpu/cpu.h src/gb/clock/clock.c src/gb/clock/clock.h src/gb/window/window.h src/gb/window/window.c src/gb/gfx/gfx.c src/gb/gfx/gfx.h)
+target_link_libraries(vbemu ${SDL2_LIBRARIES})
 
