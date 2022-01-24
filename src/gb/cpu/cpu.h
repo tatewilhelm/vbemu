@@ -1,10 +1,9 @@
-#include <stdbool.h>
-#include <stdint.h>
-#include "../clock/clock.h"
-
 #ifndef VBEMU_CPU_H
 #define VBEMU_CPU_H
 
+#include <stdbool.h>
+#include <stdint.h>
+#include "../clock/clock.h"
 
 struct gb_registers_t {
     uint16_t af;
@@ -16,6 +15,7 @@ struct gb_registers_t {
 };
 
 // GFX needs access to ram and registers, so we are just gonna make them open
+// Ram contains both cpu ram & vram.
 uint8_t ram[0xFFFF];
 struct gb_registers_t registers;
 
